@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Séjour H-BSCM — 11–12 juin</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    background: #f5f0eb;
+    color: #1a1a1a;
+    padding: 16px;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* HEADER */
+  .header {
+    background: #1a1a2e;
+    color: white;
+    border-radius: 16px;
+    padding: 20px;
+    margin-bottom: 12px;
+    text-align: center;
+  }
+  .header .place { font-size: 13px; opacity: 0.7; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 4px; }
+  .header h1 { font-size: 20px; font-weight: 700; margin-bottom: 2px; }
+  .header .date { font-size: 22px; font-weight: 300; color: #f0c060; margin: 6px 0; }
+  .header .address a {
+    font-size: 12px; opacity: 0.65; margin-top: 8px; line-height: 1.5;
+    color: white; text-decoration: none; border-bottom: 1px dashed rgba(255,255,255,0.4);
+    display: inline-block;
+  }
+  .header .address a:hover { opacity: 1; }
+  .header .booking { display: inline-block; margin-top: 10px; background: rgba(255,255,255,0.12); border-radius: 8px; padding: 5px 14px; font-size: 13px; }
+  .header .booking span { font-weight: 700; color: #f0c060; }
+
+  /* CARDS */
+  .card {
+    background: white;
+    border-radius: 16px;
+    padding: 18px;
+    margin-bottom: 12px;
+  }
+  .card-title {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: #888;
+    margin-bottom: 14px;
+  }
+
+  /* ALERT CARD */
+  .card-alert {
+    background: #fff3cd;
+    border-left: 4px solid #e6a817;
+  }
+  .card-alert .card-title { color: #9a6900; }
+
+
+  /* TIMELINE */
+  .timeline { display: flex; flex-direction: column; gap: 0; }
+  .tl-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0;
+    border-bottom: 1px solid #f0f0f0;
+  }
+  .tl-item:last-child { border-bottom: none; }
+  .tl-item.spiritual {
+    background: #f2f4f9;
+    margin: 0 -18px;
+    padding: 10px 18px;
+    border-bottom: 1px solid #e8ecf4;
+  }
+  .tl-time {
+    font-size: 14px;
+    font-weight: 700;
+    color: #1a1a2e;
+    min-width: 72px;
+    text-align: right;
+    line-height: 1.3;
+    flex-shrink: 0;
+  }
+  .tl-item.spiritual .tl-time { color: #3a4a7a; }
+  .tl-dot {
+    width: 8px; height: 8px;
+    background: #d0c8c0;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .tl-dot.warn    { background: #e6a817; }
+  .tl-dot.key     { background: #1a1a2e; }
+  .tl-dot.spirit  { background: #3a4a7a; }
+  .tl-label { font-size: 14px; line-height: 1.4; flex: 1; }
+  .tl-item.spiritual .tl-label { color: #2a3a6a; font-size: 13px; }
+  .tl-label em { display: block; font-size: 12px; color: #888; font-style: normal; margin-top: 2px; }
+  .tl-label strong { color: #c0392b; }
+  .tl-icon { font-size: 14px; flex-shrink: 0; }
+
+  /* DORTOIR GRID */
+  .dortoir-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .dortoir-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+  }
+  .dortoir-item .ico { font-size: 20px; }
+  .dortoir-item .txt { line-height: 1.3; }
+  .dortoir-item .txt small { display: block; font-size: 11px; color: #888; }
+
+
+  /* PAIEMENT */
+  .pay-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 14px;
+  }
+  .pay-row:last-child { border-bottom: none; }
+  .pay-row .ico { font-size: 18px; min-width: 24px; text-align: center; }
+
+  .annul-box {
+    background: #fef0ef;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 13px;
+    color: #c0392b;
+    line-height: 1.5;
+    margin-top: 10px;
+  }
+
+  /* RÈGLES */
+  .rules-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    text-align: center;
+  }
+  .rule-item { font-size: 12px; color: #555; line-height: 1.3; }
+  .rule-item .rico { font-size: 24px; display: block; margin-bottom: 4px; }
+
+  /* TIPS */
+  .tips { display: flex; flex-direction: column; gap: 10px; }
+  .tip {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  .tip .ico { font-size: 18px; flex-shrink: 0; }
+
+  /* LIENS */
+  a { color: #1a1a2e; text-decoration: none; }
+  a:hover { opacity: 0.7; }
+  .contact-row { font-size: 13px; color: #555; margin-top: 6px; }
+  .contact-row a { color: #1a1a2e; }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="place">Hôtellerie de la Basilique</div>
+  <h1>Sacré-Cœur de Montmartre</h1>
+  <div class="date">Nuit du 11 au 12 juin</div>
+  <div class="address">
+    <a href="https://www.google.com/maps/search/?api=1&query=35+rue+du+Chevalier+de+la+Barre+75018+Paris" target="_blank">
+      📍 35 rue du Chevalier de la Barre, 75018 Paris
+    </a>
+  </div>
+  <div class="booking">Réservation n° <span>SCM 44631</span></div>
+</div>
+
+<!-- ALERTE -->
+<div class="card card-alert">
+  <div class="card-title">⚠️ Limite absolue</div>
+  <div style="font-size:15px; font-weight:600; color:#9a6900;">Réception ferme à 21h30 — arrivée impossible après.</div>
+  <div style="font-size:13px; margin-top:6px; color:#7a5200;">En cas de retard prévisible, prévenir l'hôtellerie au préalable.</div>
+</div>
+
+<!-- TIMELINE UNIFIÉE -->
+<div class="card">
+  <div class="card-title">Programme de la nuit</div>
+
+  <!-- adoration explainer -->
+  <div style="display:flex; align-items:center; gap:10px; background:#1a1a2e; border-radius:10px; padding:12px 14px; margin-bottom:14px;">
+    <span style="font-size:24px;">🕯️</span>
+    <div>
+      <div style="font-size:14px; font-weight:700; color:#f0c060;">1h d'adoration / personne · entre 23h et 7h</div>
+      <div style="font-size:12px; color:rgba(255,255,255,0.6); margin-top:2px;">S'inscrire sur le tableau à l'arrivée · participation sauf lundi</div>
+    </div>
+  </div>
+
+  <div class="timeline">
+    <div class="tl-item">
+      <div class="tl-time">16h–21h30</div>
+      <div class="tl-dot key"></div>
+      <div class="tl-label">Arrivée · distribution des clés
+        <em>Bracelet dortoir à récupérer dès 19h</em>
+      </div>
+    </div>
+    <div class="tl-item spiritual">
+      <div class="tl-time">20h30</div>
+      <div class="tl-dot spirit"></div>
+      <div class="tl-label">Confessions
+        <em>Jusqu'à 21h45</em>
+      </div>
+      <div class="tl-icon">✝️</div>
+    </div>
+    <div class="tl-item spiritual">
+      <div class="tl-time">21h</div>
+      <div class="tl-dot spirit"></div>
+      <div class="tl-label">Introduction nuit d'adoration</div>
+      <div class="tl-icon">🕯️</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">21h30</div>
+      <div class="tl-dot warn"></div>
+      <div class="tl-label"><strong>Réception ferme</strong>
+        <em>Complies à la basilique</em>
+      </div>
+    </div>
+    <div class="tl-item spiritual">
+      <div class="tl-time">22h</div>
+      <div class="tl-dot spirit"></div>
+      <div class="tl-label">Messe du soir</div>
+      <div class="tl-icon">⛪</div>
+    </div>
+    <div class="tl-item spiritual">
+      <div class="tl-time">23h–7h</div>
+      <div class="tl-dot spirit"></div>
+      <div class="tl-label">Adoration nocturne</div>
+      <div class="tl-icon">🕯️</div>
+    </div>
+    <div class="tl-item spiritual">
+      <div class="tl-time">7h</div>
+      <div class="tl-dot spirit"></div>
+      <div class="tl-label">Messe du matin</div>
+      <div class="tl-icon">⛪</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">7h–8h30</div>
+      <div class="tl-dot key"></div>
+      <div class="tl-label">Petit déjeuner <em>Inclus</em></div>
+    </div>
+    <div class="tl-item spiritual">
+      <div class="tl-time">8h</div>
+      <div class="tl-dot spirit"></div>
+      <div class="tl-label">Office du matin</div>
+      <div class="tl-icon">✝️</div>
+    </div>
+    <div class="tl-item">
+      <div class="tl-time">8h45</div>
+      <div class="tl-dot warn"></div>
+      <div class="tl-label"><strong>Départ dortoir</strong>
+        <em>Lits libérés · bracelet rendu · dortoir quitté</em>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- DORTOIR -->
+<div class="card">
+  <div class="card-title">Votre dortoir</div>
+  <div class="dortoir-grid">
+    <div class="dortoir-item">
+      <span class="ico">💶</span>
+      <div class="txt">15 € / personne<small>à payer sur place · petit déj inclus</small></div>
+    </div>
+    <div class="dortoir-item">
+      <span class="ico">🛏️</span>
+      <div class="txt">Draps fournis<small>serviettes non fournies</small></div>
+    </div>
+    <div class="dortoir-item">
+      <span class="ico">🚿</span>
+      <div class="txt">Produits hygiène<small>non fournis · à apporter</small></div>
+    </div>
+    <div class="dortoir-item">
+      <span class="ico">🚽</span>
+      <div class="txt">WC partagés<small>pas dans la chambre</small></div>
+    </div>
+  </div>
+</div>
+
+<!-- CONSEILS -->
+<div class="card">
+  <div class="card-title">Conseils pratiques</div>
+  <div class="tips">
+    <div class="tip">
+      <span class="ico">🔇</span>
+      <span>Apporter des <strong>boules Quies</strong> — nuit en dortoir collectif</span>
+    </div>
+    <div class="tip">
+      <span class="ico">📳</span>
+      <span>Réveil en <strong>mode vibreur</strong> pour ne pas réveiller les autres</span>
+    </div>
+    <div class="tip">
+      <span class="ico">👑</span>
+      <span>Chef de groupe : <strong><a href="https://wa.me/33645488599" target="_blank" style="border-bottom: 1px dashed #1a1a2e;">Sonia</a></strong> — centralise clés et règles</span>
+    </div>
+  </div>
+</div>
+
+<!-- PAIEMENT -->
+<div class="card">
+  <div class="card-title">Paiement</div>
+  <div class="pay-row"><span class="ico">💳</span><span>CB, espèces ou virement bancaire</span></div>
+  <div class="pay-row"><span class="ico">🚫</span><span>Chèques bancaires et chèques vacances refusés</span></div>
+  <div class="annul-box">
+    ⚠️ <strong>Annulation :</strong> En cas d'annulation ou de non-présentation, l'acompte reste acquis à l'H-BSCM. Aucun recours possible.
+  </div>
+</div>
+
+<!-- RÈGLES -->
+<div class="card">
+  <div class="card-title">Règles</div>
+  <div class="rules-grid">
+    <div class="rule-item"><span class="rico">🐾</span>Pas d'animaux</div>
+    <div class="rule-item"><span class="rico">🚗</span>Pas de parking sur place</div>
+    <div class="rule-item"><span class="rico">🌙</span>Lieu de silence et de prière</div>
+    <div class="rule-item"><span class="rico">👥</span>Capacité stricte</div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div class="card" style="text-align:center;">
+  <div class="card-title">Contact</div>
+  <div style="font-weight:700; font-size:15px; margin-bottom:8px;">Hôtellerie du Sacré-Cœur de Montmartre</div>
+  <div class="contact-row"><a href="https://www.google.com/maps/search/?api=1&query=35+rue+du+Chevalier+de+la+Barre+75018+Paris" target="_blank">📍 35 rue du Chevalier de la Barre, 75018 Paris</a></div>
+  <div class="contact-row"><a href="tel:+33153418900">📞 01 53 41 89 00</a></div>
+  <div class="contact-row"><a href="mailto:hotellerie@sacrecoeurdemontmartre.fr">✉️ hotellerie@sacrecoeurdemontmartre.fr</a></div>
+  <div class="contact-row" style="margin-top:6px;"><a href="https://www.sacre-coeur-montmartre.fr" target="_blank">🌐 sacre-coeur-montmartre.fr</a></div>
+</div>
+
+</body>
+</html>
